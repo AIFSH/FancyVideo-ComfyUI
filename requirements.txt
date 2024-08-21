@@ -1,0 +1,20 @@
+numpy
+diffusers==0.11.1
+transformers
+imageio
+decord
+gdown
+einops
+omegaconf
+safetensors
+wandb
+accelerate
+# triton
+positional_encodings
+opencv-python
+scikit-image
+deepspeed;sys_platform != "win32"
+peft
+ftfy
+imageio[ffmpeg]
+imageio[pyav]
