@@ -3,7 +3,7 @@ a custom node for [FancyVideo](https://github.com/360CVGroup/FancyVideo)
 
 ## Run online
 - [镜像](https://www.xiangongyun.com/image/detail/2d27f239-c8f9-43f6-9156-fb1c06b6e3df)
-- [教程]()
+- [教程](https://b23.tv/BMu5AkH)
 
 ## Example
 
