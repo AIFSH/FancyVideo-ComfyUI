@@ -1,0 +1,15 @@
+[project]
+name = "fancyvideo-comfyui"
+description = "a custom node for [a/FancyVideo](https://github.com/360CVGroup/FancyVideo)"
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["numpy", "diffusers==0.11.1", "transformers", "imageio", "decord", "gdown", "einops", "omegaconf", "safetensors", "wandb", "accelerate", "# triton", "positional_encodings", "opencv-python", "scikit-image", "deepspeed;sys_platform != \"win32\"", "peft", "ftfy", "imageio[ffmpeg]", "imageio[pyav]"]
+
+[project.urls]
+Repository = "https://github.com/AIFSH/FancyVideo-ComfyUI"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "FancyVideo-ComfyUI"
+Icon = ""
