@@ -1,4 +1,4 @@
-# Adapted from https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/unet_2d_blocks.py
+# Adapted from https://github.com/huggingface/diffusers011/blob/main/src/diffusers011/models/unet_2d_blocks.py
 
 import torch
 from torch import nn

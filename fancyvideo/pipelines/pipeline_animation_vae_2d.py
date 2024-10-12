@@ -8,14 +8,14 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from diffusers.utils import is_accelerate_available
+from diffusers011.utils import is_accelerate_available
 from packaging import version
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers.configuration_utils import FrozenDict
-from diffusers.models import AutoencoderKL
-from diffusers.pipeline_utils import DiffusionPipeline
-from diffusers.schedulers import (
+from diffusers011.configuration_utils import FrozenDict
+from diffusers011.models import AutoencoderKL
+from diffusers011.pipeline_utils import DiffusionPipeline
+from diffusers011.schedulers import (
     DDIMScheduler,
     DPMSolverMultistepScheduler,
     EulerAncestralDiscreteScheduler,
@@ -23,7 +23,7 @@ from diffusers.schedulers import (
     LMSDiscreteScheduler,
     PNDMScheduler,
 )
-from diffusers.utils import deprecate, logging, BaseOutput
+from diffusers011.utils import deprecate, logging, BaseOutput
 
 from einops import rearrange
 
@@ -97,8 +97,8 @@ class AnimationPipeline(DiffusionPipeline):
             new_config["clip_sample"] = False
             scheduler._internal_dict = FrozenDict(new_config)
 
-        is_unet_version_less_0_9_0 = hasattr(unet.config, "_diffusers_version") and version.parse(
-            version.parse(unet.config._diffusers_version).base_version
+        is_unet_version_less_0_9_0 = hasattr(unet.config, "_diffusers011_version") and version.parse(
+            version.parse(unet.config._diffusers011_version).base_version
         ) < version.parse("0.9.0.dev0")
         is_unet_sample_size_less_64 = hasattr(unet.config, "sample_size") and unet.config.sample_size < 64
         if is_unet_version_less_0_9_0 and is_unet_sample_size_less_64:

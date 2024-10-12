@@ -83,7 +83,7 @@ class LinearAttention(nn.Module):
         return self.to_out(out)
 
 class MemoryEfficientCrossAttention(nn.Module):
-    # https://github.com/MatthieuTPHR/diffusers/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers/models/attention.py#L223
+    # https://github.com/MatthieuTPHR/diffusers011/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers011/models/attention.py#L223
     def __init__(
         self, query_dim, context_dim=None, heads=8, dim_head=64, dropout=0.0, **kwargs
     ):
@@ -479,7 +479,7 @@ class AttnBlock(nn.Module):
 class MemoryEfficientAttnBlock(nn.Module):
     """
     Uses xformers efficient implementation,
-    see https://github.com/MatthieuTPHR/diffusers/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers/models/attention.py#L223
+    see https://github.com/MatthieuTPHR/diffusers011/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers011/models/attention.py#L223
     Note: this is a single-head self-attention operation
     """
 
@@ -558,7 +558,7 @@ class MemoryEfficientAttnBlock(nn.Module):
 class MemoryEfficientAttnVideoBlock(nn.Module):
     """
     Uses xformers efficient implementation,
-    see https://github.com/MatthieuTPHR/diffusers/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers/models/attention.py#L223
+    see https://github.com/MatthieuTPHR/diffusers011/blob/d80b531ff8060ec1ea982b65a1b8df70f73aa67c/src/diffusers011/models/attention.py#L223
     Note: this is a single-head self-attention operation
     """
 

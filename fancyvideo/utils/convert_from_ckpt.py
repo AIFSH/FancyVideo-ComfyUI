@@ -31,12 +31,12 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers.models import (
+from diffusers011.models import (
     AutoencoderKL,
     PriorTransformer,
     UNet2DConditionModel,
 )
-from diffusers.schedulers import (
+from diffusers011.schedulers import (
     DDIMScheduler,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
@@ -47,7 +47,7 @@ from diffusers.schedulers import (
     PNDMScheduler,
     UnCLIPScheduler,
 )
-from diffusers.utils.import_utils import BACKENDS_MAPPING
+from diffusers011.utils.import_utils import BACKENDS_MAPPING
 
 
 def shave_segments(path, n_shave_prefix_segments=1):
@@ -212,9 +212,9 @@ def conv_attn_to_linear(checkpoint):
                 checkpoint[key] = checkpoint[key][:, :, 0]
 
 
-def create_unet_diffusers_config(original_config, image_size: int, controlnet=False):
+def create_unet_diffusers011_config(original_config, image_size: int, controlnet=False):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers011 based on the config of the LDM model.
     """
     if controlnet:
         unet_params = original_config.model.params.control_stage_config.params
@@ -281,9 +281,9 @@ def create_unet_diffusers_config(original_config, image_size: int, controlnet=Fa
     return config
 
 
-def create_vae_diffusers_config(original_config, image_size: int):
+def create_vae_diffusers011_config(original_config, image_size: int):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers011 based on the config of the LDM model.
     """
     vae_params = original_config.model.params.first_stage_config.params.ddconfig
     _ = original_config.model.params.first_stage_config.params.embed_dim
@@ -305,7 +305,7 @@ def create_vae_diffusers_config(original_config, image_size: int):
     return config
 
 
-def create_diffusers_schedular(original_config):
+def create_diffusers011_schedular(original_config):
     schedular = DDIMScheduler(
         num_train_timesteps=original_config.model.params.timesteps,
         beta_start=original_config.model.params.linear_start,
@@ -525,16 +525,16 @@ def convert_ldm_unet_checkpoint(checkpoint, config, path=None, extract_ema=False
 
         orig_index += 2
 
-        diffusers_index = 0
+        diffusers011_index = 0
 
-        while diffusers_index < 6:
-            new_checkpoint[f"controlnet_cond_embedding.blocks.{diffusers_index}.weight"] = unet_state_dict.pop(
+        while diffusers011_index < 6:
+            new_checkpoint[f"controlnet_cond_embedding.blocks.{diffusers011_index}.weight"] = unet_state_dict.pop(
                 f"input_hint_block.{orig_index}.weight"
             )
-            new_checkpoint[f"controlnet_cond_embedding.blocks.{diffusers_index}.bias"] = unet_state_dict.pop(
+            new_checkpoint[f"controlnet_cond_embedding.blocks.{diffusers011_index}.bias"] = unet_state_dict.pop(
                 f"input_hint_block.{orig_index}.bias"
             )
-            diffusers_index += 1
+            diffusers011_index += 1
             orig_index += 2
 
         new_checkpoint["controlnet_cond_embedding.conv_out.weight"] = unet_state_dict.pop(
@@ -738,7 +738,7 @@ textenc_conversion_lst = [
 textenc_conversion_map = {x[0]: x[1] for x in textenc_conversion_lst}
 
 textenc_transformer_conversion_lst = [
-    # (stable-diffusion, HF Diffusers)
+    # (stable-diffusion, HF diffusers011)
     ("resblocks.", "text_model.encoder.layers."),
     ("ln_1", "layer_norm1"),
     ("ln_2", "layer_norm2"),
@@ -835,7 +835,7 @@ def convert_open_clip_checkpoint(checkpoint):
     text_model_dict["text_model.embeddings.position_ids"] = text_model.text_model.embeddings.get_buffer("position_ids")
 
     for key in keys:
-        if "resblocks.23" in key:  # Diffusers drops the final layer and only uses the penultimate layer
+        if "resblocks.23" in key:  # diffusers011 drops the final layer and only uses the penultimate layer
             continue
         if key in textenc_conversion_map:
             text_model_dict[textenc_conversion_map[key]] = checkpoint[key]
@@ -944,7 +944,7 @@ def stable_unclip_image_noising_components(
 def convert_controlnet_checkpoint(
     checkpoint, original_config, checkpoint_path, image_size, upcast_attention, extract_ema
 ):
-    ctrlnet_config = create_unet_diffusers_config(original_config, image_size=image_size, controlnet=True)
+    ctrlnet_config = create_unet_diffusers011_config(original_config, image_size=image_size, controlnet=True)
     ctrlnet_config["upcast_attention"] = upcast_attention
 
     ctrlnet_config.pop("sample_size")

@@ -1,4 +1,4 @@
-# Adapted from https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/unet_2d_condition.py
+# Adapted from https://github.com/huggingface/diffusers011/blob/main/src/diffusers011/models/unet_2d_condition.py
 
 from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union
@@ -12,10 +12,10 @@ import torch.nn as nn
 import torch.utils.checkpoint
 import torch.nn.init as init
 
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.modeling_utils import ModelMixin
-from diffusers.utils import BaseOutput, logging
-from diffusers.models.embeddings import TimestepEmbedding, Timesteps
+from diffusers011.configuration_utils import ConfigMixin, register_to_config
+from diffusers011.modeling_utils import ModelMixin
+from diffusers011.utils import BaseOutput, logging
+from diffusers011.models.embeddings import TimestepEmbedding, Timesteps
 from .unet_blocks import (
     CrossAttnDownBlock3D,
     CrossAttnUpBlock3D,
@@ -590,7 +590,7 @@ class UNet3DConditionModel(ModelMixin, ConfigMixin):
             "CrossAttnUpBlock3D"
         ]
 
-        from diffusers.utils import WEIGHTS_NAME
+        from diffusers011.utils import WEIGHTS_NAME
         model = cls.from_config(config, **unet_additional_kwargs,cross_frame_txtattn=cross_frame_txtattn,part_module=part_module,text_attn_mode=text_attn_mode,)
         
         model_file = os.path.join(pretrained_model_path, WEIGHTS_NAME)

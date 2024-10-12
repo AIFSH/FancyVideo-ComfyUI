@@ -2,11 +2,11 @@ import torch
 import os
 import math
 import json
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.modeling_utils import ModelMixin
+from diffusers011.configuration_utils import ConfigMixin, register_to_config
+from diffusers011.modeling_utils import ModelMixin
 from typing import Optional, Union, Tuple
 from einops import rearrange, repeat
-from diffusers.models.vae import DiagonalGaussianDistribution, DecoderOutput, AutoencoderKLOutput
+from diffusers011.models.vae import DiagonalGaussianDistribution, DecoderOutput, AutoencoderKLOutput
 from .vae_models import Encoder, Decoder
 
 

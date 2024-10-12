@@ -20,13 +20,13 @@ import argparse
 import torch
 from safetensors.torch import load_file
 
-from diffusers import StableDiffusionPipeline
+from diffusers011 import StableDiffusionPipeline
 import pdb
 
 
 
 def convert_motion_lora_ckpt_to_diffusers(pipeline, state_dict, alpha=1.0):
-    # directly update weight in diffusers model
+    # directly update weight in diffusers011 model
     for key in state_dict:
         # only process lora down key
         if "up." in key: continue
@@ -58,7 +58,7 @@ def convert_lora(pipeline, state_dict, LORA_PREFIX_UNET="lora_unet", LORA_PREFIX
 
     visited = []
 
-    # directly update weight in diffusers model
+    # directly update weight in diffusers011 model
     for key in state_dict:
         # it is suggested to print out the key, it usually will be something like below
         # "lora_te_text_model_encoder_layers_0_self_attn_k_proj.lora_down.weight"
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "--base_model_path", default=None, type=str, required=True, help="Path to the base model in diffusers format."
+        "--base_model_path", default=None, type=str, required=True, help="Path to the base model in diffusers011 format."
     )
     parser.add_argument(
         "--checkpoint_path", default=None, type=str, required=True, help="Path to the checkpoint to convert."
