@@ -1,4 +1,3 @@
-diffusers
 transformers
 imageio
 decord
