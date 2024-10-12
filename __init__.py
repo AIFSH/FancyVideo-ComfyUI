@@ -95,7 +95,7 @@ class FancyVideoI2VNode:
         resolution = resolution_dict[resolution]
         reference_image = self.image2np(first_frame,resolution)
         print(reference_image.shape)
-        reference_image, video, prompt = infer_pipeline.t2v_process_one_prompt(prompt=prompt, reference_image=reference_image, seed=seed, video_length=video_length, resolution=resolution, use_noise_scheduler_snr=use_noise_scheduler_snr, fps=cond_fps, motion_score=cond_motion_score,)
+        video = infer_pipeline.t2v_process_one_prompt(prompt=prompt, reference_image=reference_image, seed=seed, video_length=video_length, resolution=resolution, use_noise_scheduler_snr=use_noise_scheduler_snr, fps=cond_fps, motion_score=cond_motion_score,)
         frame_list = []
         for frame in video:
             frame = img_as_ubyte(frame.cpu().permute(1, 2, 0).float().detach().numpy())
